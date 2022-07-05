@@ -4,7 +4,7 @@ const authenticationMiddleware = async (req, res, next) => {
 	const authHeader = req.headers.authorization
 
 	if (!authHeader || !authHeader.startsWith("Bearer ")) {
-		next(new Error("No token provided"))
+		res.status(400).send("You have to be logged in!")
 	}
 	try {
 		const token = authHeader.split(" ")[1]

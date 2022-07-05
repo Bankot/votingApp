@@ -15,6 +15,10 @@ const voteInPool = async (req, res, next) => {
 		res.status(400).send("There's a problem with ObjectId!")
 	}
 	const user = await db.collection("votingUsers").findOne({ _id: id })
+	if (!user) {
+		res.status(400).send("You have no valid token!")
+		return
+	}
 	if (user.votedIn.includes(poolId.toString())) {
 		res.status(400).send("You have already voted in that pool!")
 		return

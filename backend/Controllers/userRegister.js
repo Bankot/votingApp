@@ -16,6 +16,7 @@ const userRegister = async (req, res, next) => {
 		const { insertedId } = await db.collection("votingUsers").insertOne({
 			login: login,
 			password: hashedPassword,
+			pools: [],
 			votedIn: [],
 		})
 
