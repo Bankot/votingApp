@@ -7,11 +7,13 @@ const {
 	getPoolsByUser,
 	getPools,
 	getPoolById,
+	getUserById,
 } = require("./Controllers/")
 const authenticationMiddleware = require("./Middleware/auth")
 const router = express.Router()
 
 router.route("/pools").get(getPools)
+router.route("/user/:id").get(getUserById)
 router.route("/userRegister").post(userRegister)
 router.route("/userLogin").post(userLogin)
 router.route("/poolCreate").post(authenticationMiddleware, createPool)

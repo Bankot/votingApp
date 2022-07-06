@@ -13,6 +13,7 @@ const voteInPool = async (req, res, next) => {
 		id = ObjectId(id)
 	} catch (err) {
 		res.status(400).send("There's a problem with ObjectId!")
+		return
 	}
 	const user = await db.collection("votingUsers").findOne({ _id: id })
 	if (!user) {

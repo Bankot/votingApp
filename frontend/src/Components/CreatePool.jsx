@@ -11,10 +11,19 @@ const CreatePool = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(user.id)
 		if (question && answer1.current.value && answer2.current.value) {
-			if (question.length > 150) {
-				setMessage("Question length can be maximum 150 characters!")
+			if (
+				answer1.current.value.length > 100 ||
+				answer2.current.value.length > 100 ||
+				answer1.current.value === answer2.current.value
+			) {
+				setMessage(
+					"Answers can have maximum 100 characters and cant be the same."
+				)
+				return
+			}
+			if (question.length > 150 || question.length < 19) {
+				setMessage("Question length must be between 20 and  150 characters!")
 				return
 			}
 			axios({
@@ -28,7 +37,7 @@ const CreatePool = () => {
 					authorization: window.localStorage.getItem("authorization"),
 				},
 			})
-				.then((res) => (window.location = `/pools/${res.data.insertedId}`))
+				.then((res) => (window.location = `/pool/${res.data.insertedId}`))
 				.catch((err) => setMessage(err.response.data))
 		} else setMessage("Please fill all required fields!")
 	}

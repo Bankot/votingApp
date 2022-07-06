@@ -18,6 +18,7 @@ const createPool = async (req, res, next) => {
 			question: question,
 			options: optionsObj,
 			createdAt: new Date(),
+			creatorLogin: login,
 		})
 		await db
 			.collection("votingUsers")

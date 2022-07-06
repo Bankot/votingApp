@@ -15,6 +15,7 @@ const userRegister = async (req, res, next) => {
 		//create user using DB
 		const { insertedId } = await db.collection("votingUsers").insertOne({
 			login: login,
+			createdAt: new Date(),
 			password: hashedPassword,
 			pools: [],
 			votedIn: [],

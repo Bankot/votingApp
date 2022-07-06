@@ -12,7 +12,17 @@ const Form = (props) => {
 	const { setToken } = useContext(UserContext)
 
 	const submitHandler = (e) => {
-		if (login.current.value !== null && password.current.value !== null) {
+		setMessage(null)
+		e.preventDefault()
+		if (login.current.value && password.current.value) {
+			if (login.current.value.length < 5) {
+				setMessage("Login must be longer than 5 characters.")
+				return
+			} else if (password.current.value.length < 5) {
+				setMessage("Password must be longer than 5 characters")
+				return
+			}
+			localStorage.setItem("authorization", "")
 			setMessage(null)
 			e.preventDefault()
 			if (props.register) {
@@ -36,10 +46,7 @@ const Form = (props) => {
 					window.location.href = "/"
 				})
 				.catch((err) => setMessage(err.response.data))
-		} else {
-			setMessage("Provide all needed data!")
-			return
-		}
+		} else setMessage("Please provide all needed information.")
 	}
 
 	return (
@@ -83,7 +90,7 @@ const Form = (props) => {
 				className='p-1 border border-slate-800  w-1/3 m-auto mb-2'>
 				{props.register ? "Register" : "Log in"}
 			</button>
-			<p className='m-auto'>{message}</p>
+			<p className='text-center m-auto'>{message}</p>
 		</form>
 	)
 }

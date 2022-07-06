@@ -1,4 +1,9 @@
 const db = require("./dbConnect")
 
-db.dropCollection("pools")
-db.dropCollection("votingUsers")
+const run = async () => {
+	await db.dropCollection("pools")
+	console.log("Pools dropped")
+	await db.dropCollection("votingUsers")
+	console.log("Users")
+}
+run()

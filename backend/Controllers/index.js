@@ -5,7 +5,9 @@ const voteInPool = require("./voteInPool")
 const getPoolsByUser = require("./getPoolsByUser")
 const getPools = require("./getPools")
 const getPoolById = require("./getPoolById")
+const getUserById = require("./getUserById")
 module.exports = {
+	getUserById,
 	userRegister,
 	userLogin,
 	createPool,
